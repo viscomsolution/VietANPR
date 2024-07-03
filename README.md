@@ -32,7 +32,7 @@ Quý khách cần cài đặt thư viện để chạy chương trình:
 Để hiểu cách tích hợp thư viện vào phần mềm cổng kiểm soát bãi xe chúng tôi có kèm theo source code example cách gọi hàm.
 
 Thông tin về source code example:
-- Viết bằng ngôn ngữ C#
+- Viết bằng ngôn ngữ C# và VB.NET
 - Chỉ có 1 phiên bản x64
 - Build bằng Visual Studio 2017 trở lên
 - Chỉ chạy trên Windows 10 x64 (Không hỗ trợ Windows 7, Windows 10 x86)

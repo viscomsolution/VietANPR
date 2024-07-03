@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.34526.175
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ExampleVietANPR_VB", "ExampleVietANPR_VB\ExampleVietANPR_VB.vbproj", "{72F5C347-9119-467F-863B-C7442B2FED8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{72F5C347-9119-467F-863B-C7442B2FED8C}.Debug|x64.ActiveCfg = Debug|x64
+		{72F5C347-9119-467F-863B-C7442B2FED8C}.Debug|x64.Build.0 = Debug|x64
+		{72F5C347-9119-467F-863B-C7442B2FED8C}.Release|x64.ActiveCfg = Release|x64
+		{72F5C347-9119-467F-863B-C7442B2FED8C}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9067ECE6-B124-4269-8199-A47C89EF90BC}
+	EndGlobalSection
+EndGlobal
