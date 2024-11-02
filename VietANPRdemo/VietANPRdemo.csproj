@@ -44,6 +44,10 @@
     <Reference Include="AForge.Video.DirectShow">
       <HintPath>.\AForge.Video.DirectShow.dll</HintPath>
     </Reference>
+    <Reference Include="AltoControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\bin\AltoControls.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,6 +66,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\lib\TGMTcs\src\TGMTdraw.cs">
+      <Link>TGMTcs\TGMTdraw.cs</Link>
+    </Compile>
     <Compile Include="..\lib\TGMTcs\src\TGMTimage.cs">
       <Link>TGMTcs\TGMTimage.cs</Link>
     </Compile>
@@ -107,6 +114,7 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="ParkingUtil.cs" />
     <Compile Include="Plate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

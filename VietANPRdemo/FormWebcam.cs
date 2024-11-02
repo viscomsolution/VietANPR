@@ -148,23 +148,28 @@ namespace VietANPRdemo
         void Read(Bitmap bmp)
         {
             m_watch = Stopwatch.StartNew();
-            PlateInfo result = Program.reader.Read(bmp);
+            VehiclePlate[] plates = Program.reader.Reads(bmp);
             m_watch.Stop();
+
+            if (plates.Length == 0)
+                return;
+
+            VehiclePlate plate = plates[0];
 
             this.Invoke(new Action(() =>
             {
                 FormMain.GetInstance().StopProgressbar();
-                lbl_result.Text = result.text;
+                lbl_result.Text = plate.text;
 
-                lbl_result.ForeColor = result.isValid ? Color.White : Color.Red;
+                lbl_result.ForeColor = plate.isValid ? Color.White : Color.Red;
 
-                if (result.bitmap == null)
+                if (plate.bitmap == null)
                 {
-                    FormMain.GetInstance().PrintError(result.error);
+                    FormMain.GetInstance().PrintError(plate.error);
                 }
                 else
                 {
-                    picResult.Image = result.bitmap;
+                    picResult.Image = plate.bitmap;
                     FormMain.GetInstance().PrintMessage("Elapsed: " + m_watch.ElapsedMilliseconds.ToString() + "ms");
                 }
                 

@@ -37,6 +37,7 @@ namespace VietANPRdemo
         private void FormImage_Load(object sender, EventArgs e)
         {
             chk_draw.Checked = Program.reader.DrawRectangle;
+            chk_crop.Checked = Program.reader.CropPlate;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,6 +59,7 @@ namespace VietANPRdemo
         private void chk_crop_CheckedChanged(object sender, EventArgs e)
         {
             Program.reader.CropPlate = chk_crop.Checked;
+            TGMTregistry.GetInstance().SaveValue("CropPlate", chk_crop.Checked);
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,6 +67,7 @@ namespace VietANPRdemo
         private void chk_draw_CheckedChanged(object sender, EventArgs e)
         {
             Program.reader.DrawRectangle = chk_draw.Checked;
+            TGMTregistry.GetInstance().SaveValue("DrawRectangle", chk_draw.Checked);
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,13 +94,12 @@ namespace VietANPRdemo
             Bitmap bmp = TGMTimage.LoadBitmapWithoutLock(fileName);
             if (bmp != null)
             {
-                picInput.Image = bmp;
+                picResult.Image = bmp;
                 FormMain.GetInstance().PrintMessage("");
                 FormMain.GetInstance().StartProgressbar();
 
                 watch = Stopwatch.StartNew();
-                Thread t = new Thread(() => Read(fileName));
-                t.Start();
+                Read(fileName);
             }
             
         }
@@ -105,30 +107,94 @@ namespace VietANPRdemo
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         void Read(string imagePath)
-        {            
-            PlateInfo result = Program.reader.Read(imagePath);
-            this.Invoke(new Action(() =>
-            {
-                watch.Stop();
-                FormMain.GetInstance().StopProgressbar();
-                lbl_result.Text = result.text;
+        {
+            string text = "";
 
-                if (result.bitmap == null)
+            FormMain.GetInstance().PrintMessage("");
+
+            VehiclePlate plate = null;
+            if (Program.readingMode == ReadingMode.TopLeft)
+            {
+                VehiclePlate[] plates = Program.reader.Reads(imagePath);
+                if(plates.Length > 0)
                 {
-                    FormMain.GetInstance().PrintMessage(result.error);
+                    plate = plates[0];
+                    text = plate.text;
+                }                
+            }
+            else
+            {                
+                VehiclePlate[] results = Program.reader.Reads(imagePath);
+
+                if(results.Length > 0)
+                {
+                    Bitmap bmp = new Bitmap(imagePath);
+                    int thickness = (int)Math.Round((float)bmp.Width / 200);
+
+                    if (Program.readingMode == ReadingMode.All)
+                    {                        
+                        if (results.Length == 1)
+                        {
+                            text = results[0].text;
+                            bmp = TGMTdraw.DrawRectangle(bmp, results[0].rect, Color.Green, false, thickness);
+                        }
+                        else
+                        {
+                            for (int i = 0; i < results.Length; i++)
+                            {
+                                text += results[i].text + Program.delimiter;
+                                bmp = TGMTdraw.DrawRectangle(bmp, results[i].rect, Color.Green, false, thickness);
+                            }
+                        }                        
+                    }
+                    else if (Program.readingMode == ReadingMode.Biggest)
+                    {
+                        plate = ParkingUtil.GetBiggest(results);
+                        text = plate.text;
+                        bmp = TGMTdraw.DrawRectangle(bmp, plate.rect, Color.Green, false, thickness);
+                    }
+                    else if (Program.readingMode == ReadingMode.Center)
+                    {                        
+                        plate = ParkingUtil.GetNearestCenter(bmp, results);
+                        text = plate.text;
+                        bmp = TGMTdraw.DrawRectangle(bmp, plate.rect, Color.Green, false, thickness);
+                    }
+
+                    picResult.Image = bmp;
                 }
                 else
-                {                    
-                    picResult.Image = result.bitmap;
-                    FormMain.GetInstance().PrintMessage("Elapsed: " + watch.ElapsedMilliseconds.ToString() + "ms");
-
-                    string outputName = "output\\" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + ".jpg";
-                    result.bitmap.Save(outputName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                {
+                    text = "Không tìm thấy biển số";
                 }
+            }
 
-                btn_select.Enabled = true;                
-                
-            }));
+            lbl_result.Text = text;
+
+            FormMain.GetInstance().StopProgressbar();
+
+            watch.Stop();
+
+            FormMain.GetInstance().PrintMessage(watch.ElapsedMilliseconds + " ms");
+
+            if (plate == null)
+                return;
+
+            
+            
+
+            if (plate.bitmap == null)
+            {
+                FormMain.GetInstance().PrintMessage(plate.error);
+            }
+            else
+            {                    
+                picResult.Image = plate.bitmap;
+                FormMain.GetInstance().PrintMessage("Elapsed: " + watch.ElapsedMilliseconds.ToString() + "ms");
+
+                string outputName = "output\\" + DateTime.Now.ToString("yyyy-MM-dd-hh-mm-ss") + ".jpg";
+                plate.bitmap.Save(outputName, System.Drawing.Imaging.ImageFormat.Jpeg);
+            }           
+
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////

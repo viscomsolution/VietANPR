@@ -11,19 +11,22 @@ namespace VietANPRdemo
         public int index = 0;
         string imagePath = "";
         string text = "";
+        string alphanumeric = "";
 
-        public Plate(string _imagePath, string _text)
+        public Plate(string _imagePath, string _text, string _alphanumeric)
         {
             imagePath = _imagePath;
             text = _text;
+            alphanumeric = _alphanumeric;
         }
 
         public string[] ToArray(bool fullPath = true)
         {
-            string[] arr = new string[3];
+            string[] arr = new string[4];
             arr[0] = index.ToString();
             arr[1] = fullPath ? imagePath : Path.GetFileName(imagePath);
             arr[2] = text;
+            arr[3] = alphanumeric;
             return arr;
         }
     }

@@ -162,35 +162,39 @@ namespace VietANPRdemo
                 lbl_result.Text = "";
                 watch = Stopwatch.StartNew();
 
-                PlateInfo result = Program.reader.Read(bmp);
+                VehiclePlate[] plates = Program.reader.Reads(bmp);
                 watch.Stop();
 
+                if (plates.Length == 0)
+                    return;
 
-                if (result.text == "")
+                VehiclePlate plate = plates[0];
+
+                if (plate.text == "")
                 {
-                    lbl_result.Text = "Not found";
+                    lbl_result.Text = plate.error;
                 }
                 else
                 {
-                    if (m_showValidOnly && !result.isValid)
+                    if (m_showValidOnly && !plate.isValid)
                     {
                         timerDetect.Start();
                         return;
                     }
 
 
-                    lbl_result.Text = result.text;
-                    lbl_result.ForeColor = result.isValid ? Color.White : Color.Red;
-                    if (result.bitmap == null)
+                    lbl_result.Text = plate.text;
+                    lbl_result.ForeColor = plate.isValid ? Color.White : Color.Red;
+                    if (plate.bitmap == null)
                     {
-                        FormMain.GetInstance().PrintError(result.error);
+                        FormMain.GetInstance().PrintError(plate.error);
                     }
                     else
                     {
                         UC.UCplate ucPlate = new UC.UCplate();
-                        ucPlate.picResult.Image = (Bitmap)result.bitmap.Clone();
-                        ucPlate.lblPlate.Text = result.text;
-                        ucPlate.lblPlate.ForeColor = result.isValid ? Color.Green : Color.Red;
+                        ucPlate.picResult.Image = (Bitmap)plate.bitmap.Clone();
+                        ucPlate.lblPlate.Text = plate.text;
+                        ucPlate.lblPlate.ForeColor = plate.isValid ? Color.Green : Color.Red;
                         panelResult.Controls.Add(ucPlate);
                         FormMain.GetInstance().PrintMessage("Elapsed: " + watch.ElapsedMilliseconds.ToString() + "ms");
                     }

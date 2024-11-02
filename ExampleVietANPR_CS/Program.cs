@@ -15,16 +15,19 @@ namespace ExampleVietANPR
             PlateReader reader = new PlateReader();
 
             //Đọc biển số từ đường dẫn ảnh, kết quả trả về là class chứa các thông tin về biển số
-            PlateInfo plate = reader.Read("2019-03-25.06-12-14.jpg");
+            VehiclePlate[] plates = reader.Reads("2019-03-25.06-12-14.jpg");
 
-            //Thuộc tính text chứa ký tự đọc được 
-            Console.WriteLine(plate.text);
+            for(int i=0; i<plates.Length; i++)
+            {
+                VehiclePlate plate = plates[i];
 
-            //alphanumeric là text loại bỏ ký tự đặc biệt
-            Console.WriteLine(plate.alphanumeric);
+                //Thuộc tính text chứa ký biển số, alphanumeric là text loại bỏ ký tự đặc biệt
+                Console.WriteLine(plate.text + " (" + plate.alphanumeric + ")" );
 
-            //dừng chương trình để xem kết quả
-            Console.ReadLine();
+
+                //dừng chương trình để xem kết quả
+                Console.ReadLine();
+            }
         }
     }
 }

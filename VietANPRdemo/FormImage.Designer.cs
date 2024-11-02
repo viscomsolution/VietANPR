@@ -33,24 +33,20 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.timerClear = new System.Windows.Forms.Timer(this.components);
             this.panelLogo = new System.Windows.Forms.Panel();
-            this.btn_detect = new System.Windows.Forms.Button();
+            this.txt_fileName = new AltoControls.BrowseFile();
+            this.btn_detect = new AltoControls.AltoButton();
+            this.chk_crop = new System.Windows.Forms.CheckBox();
             this.chk_draw = new System.Windows.Forms.CheckBox();
-            this.txt_fileName = new System.Windows.Forms.TextBox();
-            this.btn_select = new System.Windows.Forms.Button();
             this.lbl_result = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.picResult = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.picInput = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
             this.picWebcam = new System.Windows.Forms.PictureBox();
-            this.chk_crop = new System.Windows.Forms.CheckBox();
             this.panelLogo.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picResult)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWebcam)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,12 +66,11 @@
             // 
             // panelLogo
             // 
-            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(67)))), ((int)(((byte)(183)))), ((int)(((byte)(110)))));
-            this.panelLogo.Controls.Add(this.chk_crop);
-            this.panelLogo.Controls.Add(this.btn_detect);
-            this.panelLogo.Controls.Add(this.chk_draw);
+            this.panelLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(232)))), ((int)(((byte)(240)))), ((int)(((byte)(250)))));
             this.panelLogo.Controls.Add(this.txt_fileName);
-            this.panelLogo.Controls.Add(this.btn_select);
+            this.panelLogo.Controls.Add(this.btn_detect);
+            this.panelLogo.Controls.Add(this.chk_crop);
+            this.panelLogo.Controls.Add(this.chk_draw);
             this.panelLogo.Controls.Add(this.lbl_result);
             this.panelLogo.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelLogo.Location = new System.Drawing.Point(0, 0);
@@ -83,60 +78,74 @@
             this.panelLogo.Size = new System.Drawing.Size(1023, 86);
             this.panelLogo.TabIndex = 21;
             // 
+            // txt_fileName
+            // 
+            this.txt_fileName.BackColor = System.Drawing.Color.Transparent;
+            this.txt_fileName.BackgroundColor = System.Drawing.Color.White;
+            this.txt_fileName.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(133)))), ((int)(((byte)(200)))));
+            this.txt_fileName.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txt_fileName.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txt_fileName.Location = new System.Drawing.Point(21, 12);
+            this.txt_fileName.Name = "txt_fileName";
+            this.txt_fileName.Padding = new System.Windows.Forms.Padding(5);
+            this.txt_fileName.Pattern = "";
+            this.txt_fileName.Size = new System.Drawing.Size(457, 30);
+            this.txt_fileName.TabIndex = 11;
+            this.txt_fileName.TextChanged += new System.EventHandler(this.txt_fileName_TextChanged);
+            // 
             // btn_detect
             // 
-            this.btn_detect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(148)))), ((int)(((byte)(188)))));
+            this.btn_detect.Active1 = System.Drawing.Color.DodgerBlue;
+            this.btn_detect.Active2 = System.Drawing.Color.DeepSkyBlue;
+            this.btn_detect.BackColor = System.Drawing.Color.Transparent;
+            this.btn_detect.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btn_detect.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.btn_detect.ForeColor = System.Drawing.Color.White;
-            this.btn_detect.Location = new System.Drawing.Point(507, 14);
+            this.btn_detect.Inactive1 = System.Drawing.Color.DeepSkyBlue;
+            this.btn_detect.Inactive2 = System.Drawing.Color.DodgerBlue;
+            this.btn_detect.Location = new System.Drawing.Point(489, 9);
             this.btn_detect.Name = "btn_detect";
-            this.btn_detect.Size = new System.Drawing.Size(94, 35);
-            this.btn_detect.TabIndex = 7;
+            this.btn_detect.Radius = 10;
+            this.btn_detect.Size = new System.Drawing.Size(110, 40);
+            this.btn_detect.Stroke = false;
+            this.btn_detect.StrokeColor = System.Drawing.Color.Gray;
+            this.btn_detect.TabIndex = 9;
             this.btn_detect.Text = "Detect";
-            this.btn_detect.UseVisualStyleBackColor = false;
+            this.btn_detect.Transparency = false;
             this.btn_detect.Click += new System.EventHandler(this.btn_detect_Click);
+            // 
+            // chk_crop
+            // 
+            this.chk_crop.AutoSize = true;
+            this.chk_crop.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.chk_crop.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.chk_crop.Location = new System.Drawing.Point(626, 12);
+            this.chk_crop.Name = "chk_crop";
+            this.chk_crop.Size = new System.Drawing.Size(92, 23);
+            this.chk_crop.TabIndex = 8;
+            this.chk_crop.Text = "Crop plate";
+            this.chk_crop.UseVisualStyleBackColor = true;
+            this.chk_crop.CheckedChanged += new System.EventHandler(this.chk_crop_CheckedChanged);
             // 
             // chk_draw
             // 
             this.chk_draw.AutoSize = true;
             this.chk_draw.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.chk_draw.ForeColor = System.Drawing.Color.White;
-            this.chk_draw.Location = new System.Drawing.Point(169, 57);
+            this.chk_draw.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.chk_draw.Location = new System.Drawing.Point(726, 12);
             this.chk_draw.Name = "chk_draw";
-            this.chk_draw.Size = new System.Drawing.Size(120, 23);
+            this.chk_draw.Size = new System.Drawing.Size(157, 23);
             this.chk_draw.TabIndex = 6;
-            this.chk_draw.Text = "Draw rectangle";
+            this.chk_draw.Text = "Draw text - rectangle";
             this.chk_draw.UseVisualStyleBackColor = true;
             this.chk_draw.CheckedChanged += new System.EventHandler(this.chk_draw_CheckedChanged);
-            // 
-            // txt_fileName
-            // 
-            this.txt_fileName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_fileName.Location = new System.Drawing.Point(21, 19);
-            this.txt_fileName.Name = "txt_fileName";
-            this.txt_fileName.Size = new System.Drawing.Size(380, 25);
-            this.txt_fileName.TabIndex = 5;
-            this.txt_fileName.TextChanged += new System.EventHandler(this.txt_fileName_TextChanged);
-            // 
-            // btn_select
-            // 
-            this.btn_select.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(148)))), ((int)(((byte)(188)))));
-            this.btn_select.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_select.ForeColor = System.Drawing.Color.White;
-            this.btn_select.Location = new System.Drawing.Point(407, 14);
-            this.btn_select.Name = "btn_select";
-            this.btn_select.Size = new System.Drawing.Size(94, 35);
-            this.btn_select.TabIndex = 4;
-            this.btn_select.Text = "Select";
-            this.btn_select.UseVisualStyleBackColor = false;
-            this.btn_select.Click += new System.EventHandler(this.btn_select_Click);
             // 
             // lbl_result
             // 
             this.lbl_result.AutoSize = true;
             this.lbl_result.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_result.ForeColor = System.Drawing.Color.White;
-            this.lbl_result.Location = new System.Drawing.Point(607, 14);
+            this.lbl_result.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbl_result.Location = new System.Drawing.Point(16, 53);
             this.lbl_result.Name = "lbl_result";
             this.lbl_result.Size = new System.Drawing.Size(76, 30);
             this.lbl_result.TabIndex = 2;
@@ -158,8 +167,6 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(148)))), ((int)(((byte)(188)))));
             this.panel2.Controls.Add(this.picResult);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.picInput);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -169,33 +176,13 @@
             // picResult
             // 
             this.picResult.BackColor = System.Drawing.Color.White;
-            this.picResult.Location = new System.Drawing.Point(489, 37);
+            this.picResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picResult.Location = new System.Drawing.Point(0, 0);
             this.picResult.Name = "picResult";
-            this.picResult.Size = new System.Drawing.Size(480, 320);
-            this.picResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picResult.Size = new System.Drawing.Size(1023, 419);
+            this.picResult.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picResult.TabIndex = 26;
             this.picResult.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(188, 9);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 25);
-            this.label3.TabIndex = 25;
-            this.label3.Text = "Ảnh input";
-            // 
-            // picInput
-            // 
-            this.picInput.BackColor = System.Drawing.Color.White;
-            this.picInput.Location = new System.Drawing.Point(3, 37);
-            this.picInput.Name = "picInput";
-            this.picInput.Size = new System.Drawing.Size(480, 320);
-            this.picInput.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picInput.TabIndex = 24;
-            this.picInput.TabStop = false;
             // 
             // label2
             // 
@@ -218,19 +205,6 @@
             this.picWebcam.TabIndex = 24;
             this.picWebcam.TabStop = false;
             // 
-            // chk_crop
-            // 
-            this.chk_crop.AutoSize = true;
-            this.chk_crop.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.chk_crop.ForeColor = System.Drawing.Color.White;
-            this.chk_crop.Location = new System.Drawing.Point(21, 57);
-            this.chk_crop.Name = "chk_crop";
-            this.chk_crop.Size = new System.Drawing.Size(92, 23);
-            this.chk_crop.TabIndex = 8;
-            this.chk_crop.Text = "Crop plate";
-            this.chk_crop.UseVisualStyleBackColor = true;
-            this.chk_crop.CheckedChanged += new System.EventHandler(this.chk_crop_CheckedChanged);
-            // 
             // FormImage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -239,16 +213,14 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelLogo);
             this.Name = "FormImage";
-            this.Text = "Phần mềm đọc Căn cước Công dân";
+            this.Text = "Đọc từng ảnh";
             this.Load += new System.EventHandler(this.FormImage_Load);
             this.panelLogo.ResumeLayout(false);
             this.panelLogo.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picResult)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWebcam)).EndInit();
             this.ResumeLayout(false);
 
@@ -264,14 +236,11 @@
         private System.Windows.Forms.PictureBox picWebcam;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox picInput;
-        private System.Windows.Forms.Button btn_select;
-        private System.Windows.Forms.TextBox txt_fileName;
         private System.Windows.Forms.PictureBox picResult;
         private System.Windows.Forms.CheckBox chk_draw;
-        private System.Windows.Forms.Button btn_detect;
         private System.Windows.Forms.CheckBox chk_crop;
+        private AltoControls.AltoButton btn_detect;
+        private AltoControls.BrowseFile txt_fileName;
     }
 }
 
