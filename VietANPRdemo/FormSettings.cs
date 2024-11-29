@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using TGMT;
 using System.Windows.Forms;
 using TGMTcs;
 
@@ -33,43 +33,35 @@ namespace VietANPRdemo
 
         private void FormSettings_Load(object sender, EventArgs e)
         {
-            
-        }
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        private void FormSettings_Shown(object sender, EventArgs e)
-        {
-            chk_enableDeepScan.Checked = TGMTregistry.GetInstance().ReadBool("EnableDeepScan");
-            chkEnableLog.Checked = TGMTregistry.GetInstance().ReadBool("EnableLog");
-            
-            chkCrop.Checked = TGMTregistry.GetInstance().ReadBool("CropResultImage");
-            
-            txtFolderOutput.Text = TGMTregistry.GetInstance().ReadString("folderOutput");
+            if (Program.readingMode == ReadingMode.All)
+                rd_all.Checked = true;
+            else if (Program.readingMode == ReadingMode.Best)
+                rd_topLeft.Checked = true;
+            else if (Program.readingMode == ReadingMode.Biggest)
+                rd_biggest.Checked = true;
+            else if (Program.readingMode == ReadingMode.Center)
+                rd_center.Checked = true;
+            else
+                rd_topLeft.Checked = true;
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            //Program.reader.EnableDeepScan = chk_enableDeepScan.Checked;
-            //TGMTregistry.GetInstance().SaveValue("EnableDeepScan", Program.g_detector.EnableDeepScan);
+            if(rd_all.Checked)
+                Program.readingMode = ReadingMode.All;
+            else if (rd_topLeft.Checked)
+                Program.readingMode = ReadingMode.Best;
+            else if (rd_biggest.Checked)
+                Program.readingMode = ReadingMode.Biggest;
+            else if (rd_center.Checked)
+                Program.readingMode = ReadingMode.Center;
 
 
-            //Program.g_detector.EnableLog = chkEnableLog.Checked;
-            //TGMTregistry.GetInstance().SaveValue("EnableLog", Program.g_detector.EnableLog);            
+            TGMTregistry.GetInstance().SaveValue("ReadingMode", (int)Program.readingMode);
 
-
-            
-
-
-            //Program.g_detector.CropResultImage = chkCrop.Checked;
-            //TGMTregistry.GetInstance().SaveValue("CropResultImage", Program.g_detector.CropResultImage);
-
-
-            //Program.folderOutput = txtFolderOutput.Text != "" ? TGMTutil.CorrectPath(txtFolderOutput.Text) : "";
-            //TGMTregistry.GetInstance().SaveValue("folderOutput", txtFolderOutput.Text);
-
+            FormMain.GetInstance().PrintSuccess("Save thành công");
         }
     }
 }

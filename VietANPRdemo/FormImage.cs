@@ -113,12 +113,11 @@ namespace VietANPRdemo
             FormMain.GetInstance().PrintMessage("");
 
             VehiclePlate plate = null;
-            if (Program.readingMode == ReadingMode.TopLeft)
+            if (Program.readingMode == ReadingMode.Best)
             {
-                VehiclePlate[] plates = Program.reader.Reads(imagePath);
-                if(plates.Length > 0)
+                plate = Program.reader.Read(imagePath);
+                if(plate != null)
                 {
-                    plate = plates[0];
                     text = plate.text;
                 }                
             }
@@ -136,7 +135,14 @@ namespace VietANPRdemo
                         if (results.Length == 1)
                         {
                             text = results[0].text;
-                            bmp = TGMTdraw.DrawRectangle(bmp, results[0].rect, Color.Green, false, thickness);
+                            if(results[0].bitmap == null)
+                            {
+                                bmp = TGMTdraw.DrawRectangle(bmp, results[0].rect, Color.Green, false, thickness);
+                            }
+                            else
+                            {
+                                bmp = results[0].bitmap;
+                            }                            
                         }
                         else
                         {
@@ -145,7 +151,7 @@ namespace VietANPRdemo
                                 text += results[i].text + Program.delimiter;
                                 bmp = TGMTdraw.DrawRectangle(bmp, results[i].rect, Color.Green, false, thickness);
                             }
-                        }                        
+                        }
                     }
                     else if (Program.readingMode == ReadingMode.Biggest)
                     {

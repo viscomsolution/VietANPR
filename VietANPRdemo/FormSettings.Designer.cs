@@ -29,120 +29,101 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btn_save = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtFolderOutput = new System.Windows.Forms.TextBox();
+            this.rd_center = new System.Windows.Forms.RadioButton();
+            this.rd_biggest = new System.Windows.Forms.RadioButton();
+            this.rd_topLeft = new System.Windows.Forms.RadioButton();
+            this.rd_all = new System.Windows.Forms.RadioButton();
             this.timerClear = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.chk_enableDeepScan = new System.Windows.Forms.CheckBox();
-            this.chkCrop = new System.Windows.Forms.CheckBox();
-            this.chkEnableLog = new System.Windows.Forms.CheckBox();
+            this.btn_save = new AltoControls.AltoButton();
             this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btn_save
-            // 
-            this.btn_save.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_save.Location = new System.Drawing.Point(356, 385);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(77, 33);
-            this.btn_save.TabIndex = 25;
-            this.btn_save.Text = "Save";
-            this.btn_save.UseVisualStyleBackColor = true;
-            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtFolderOutput);
+            this.groupBox1.Controls.Add(this.rd_center);
+            this.groupBox1.Controls.Add(this.rd_biggest);
+            this.groupBox1.Controls.Add(this.rd_topLeft);
+            this.groupBox1.Controls.Add(this.rd_all);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(0, 114);
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(800, 67);
+            this.groupBox1.Size = new System.Drawing.Size(800, 194);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Folder";
+            this.groupBox1.Text = "Ảnh có nhiều biển số";
             // 
-            // label2
+            // rd_center
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(24, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 19);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Output folder";
+            this.rd_center.AutoSize = true;
+            this.rd_center.Location = new System.Drawing.Point(18, 128);
+            this.rd_center.Name = "rd_center";
+            this.rd_center.Size = new System.Drawing.Size(244, 23);
+            this.rd_center.TabIndex = 3;
+            this.rd_center.TabStop = true;
+            this.rd_center.Text = "Đọc 01 biển số gần trung tâm nhất";
+            this.rd_center.UseVisualStyleBackColor = true;
             // 
-            // txtFolderOutput
+            // rd_biggest
             // 
-            this.txtFolderOutput.Location = new System.Drawing.Point(138, 24);
-            this.txtFolderOutput.Name = "txtFolderOutput";
-            this.txtFolderOutput.Size = new System.Drawing.Size(265, 25);
-            this.txtFolderOutput.TabIndex = 14;
+            this.rd_biggest.AutoSize = true;
+            this.rd_biggest.Location = new System.Drawing.Point(18, 99);
+            this.rd_biggest.Name = "rd_biggest";
+            this.rd_biggest.Size = new System.Drawing.Size(241, 23);
+            this.rd_biggest.TabIndex = 2;
+            this.rd_biggest.TabStop = true;
+            this.rd_biggest.Text = "Đọc 01 biển số kích thước lớn nhất";
+            this.rd_biggest.UseVisualStyleBackColor = true;
+            // 
+            // rd_topLeft
+            // 
+            this.rd_topLeft.AutoSize = true;
+            this.rd_topLeft.Checked = true;
+            this.rd_topLeft.Location = new System.Drawing.Point(17, 70);
+            this.rd_topLeft.Name = "rd_topLeft";
+            this.rd_topLeft.Size = new System.Drawing.Size(241, 23);
+            this.rd_topLeft.TabIndex = 1;
+            this.rd_topLeft.TabStop = true;
+            this.rd_topLeft.Text = "Đọc 01 biển số đúng nhất (default)";
+            this.rd_topLeft.UseVisualStyleBackColor = true;
+            // 
+            // rd_all
+            // 
+            this.rd_all.AutoSize = true;
+            this.rd_all.Location = new System.Drawing.Point(17, 41);
+            this.rd_all.Name = "rd_all";
+            this.rd_all.Size = new System.Drawing.Size(339, 23);
+            this.rd_all.TabIndex = 0;
+            this.rd_all.TabStop = true;
+            this.rd_all.Text = "Đọc tất cả biển số, cách nhau bằng dấu chấm phẩy";
+            this.rd_all.UseVisualStyleBackColor = true;
             // 
             // timerClear
             // 
             this.timerClear.Interval = 1000;
             // 
-            // label1
+            // btn_save
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(284, 45);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(373, 19);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Ghi chú: dành cho bãi xe không lắp được camera trực diện";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.SystemColors.Control;
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.chk_enableDeepScan);
-            this.groupBox3.Controls.Add(this.chkCrop);
-            this.groupBox3.Controls.Add(this.chkEnableLog);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(0, 0);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(800, 114);
-            this.groupBox3.TabIndex = 28;
-            this.groupBox3.TabStop = false;
-            // 
-            // chk_enableDeepScan
-            // 
-            this.chk_enableDeepScan.AutoSize = true;
-            this.chk_enableDeepScan.Location = new System.Drawing.Point(270, 26);
-            this.chk_enableDeepScan.Name = "chk_enableDeepScan";
-            this.chk_enableDeepScan.Size = new System.Drawing.Size(133, 23);
-            this.chk_enableDeepScan.TabIndex = 17;
-            this.chk_enableDeepScan.Text = "Enable deep scan";
-            this.chk_enableDeepScan.UseVisualStyleBackColor = true;
-            // 
-            // chkCrop
-            // 
-            this.chkCrop.AutoSize = true;
-            this.chkCrop.Location = new System.Drawing.Point(17, 26);
-            this.chkCrop.Name = "chkCrop";
-            this.chkCrop.Size = new System.Drawing.Size(137, 23);
-            this.chkCrop.TabIndex = 15;
-            this.chkCrop.Text = "Crop result image";
-            this.chkCrop.UseVisualStyleBackColor = true;
-            // 
-            // chkEnableLog
-            // 
-            this.chkEnableLog.AutoSize = true;
-            this.chkEnableLog.Location = new System.Drawing.Point(17, 79);
-            this.chkEnableLog.Name = "chkEnableLog";
-            this.chkEnableLog.Size = new System.Drawing.Size(84, 23);
-            this.chkEnableLog.TabIndex = 14;
-            this.chkEnableLog.Text = "Write log";
-            this.chkEnableLog.UseVisualStyleBackColor = true;
+            this.btn_save.Active1 = System.Drawing.Color.DodgerBlue;
+            this.btn_save.Active2 = System.Drawing.Color.DeepSkyBlue;
+            this.btn_save.BackColor = System.Drawing.Color.Transparent;
+            this.btn_save.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btn_save.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_save.ForeColor = System.Drawing.Color.White;
+            this.btn_save.Inactive1 = System.Drawing.Color.DeepSkyBlue;
+            this.btn_save.Inactive2 = System.Drawing.Color.DodgerBlue;
+            this.btn_save.Location = new System.Drawing.Point(317, 223);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Radius = 10;
+            this.btn_save.Size = new System.Drawing.Size(110, 40);
+            this.btn_save.Stroke = false;
+            this.btn_save.StrokeColor = System.Drawing.Color.Gray;
+            this.btn_save.TabIndex = 27;
+            this.btn_save.Text = "Save";
+            this.btn_save.Transparency = false;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
             // FormSettings
             // 
@@ -152,30 +133,22 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_save);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBox3);
             this.Name = "FormSettings";
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.FormSettings_Load);
-            this.Shown += new System.EventHandler(this.FormSettings_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtFolderOutput;
         private System.Windows.Forms.Timer timerClear;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox chk_enableDeepScan;
-        private System.Windows.Forms.CheckBox chkCrop;
-        private System.Windows.Forms.CheckBox chkEnableLog;
+        private System.Windows.Forms.RadioButton rd_center;
+        private System.Windows.Forms.RadioButton rd_biggest;
+        private System.Windows.Forms.RadioButton rd_topLeft;
+        private System.Windows.Forms.RadioButton rd_all;
+        private AltoControls.AltoButton btn_save;
     }
 }

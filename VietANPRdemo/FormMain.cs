@@ -41,7 +41,8 @@ namespace VietANPRdemo
         {
             TGMTregistry.GetInstance().Init("IPSS");
 
-            
+            Program.readingMode = (ReadingMode) TGMTregistry.GetInstance().ReadInt("ReadingMode", (int)ReadingMode.Best);
+
 
             BackgroundWorker worker = new BackgroundWorker();
             worker.WorkerReportsProgress = true;
@@ -63,7 +64,9 @@ namespace VietANPRdemo
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+            Program.reader.CropPlate = TGMTregistry.GetInstance().ReadBool("CropPlate");
+
+
             StopProgressbar();
 
             this.Text += " " + (Program.reader.IsLicense ? " (Licensed)" : " (Vui lòng liên hệ: 0939.825.125)");
@@ -78,6 +81,8 @@ namespace VietANPRdemo
                 btnFolder.PerformClick();
             else if (childform == "FormRealtime")
                 btn_realtime.PerformClick();
+            else
+                btnImage.PerformClick();
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,7 +124,7 @@ namespace VietANPRdemo
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
-            OpenChildForm(FormFolder.GetInstance(), sender);
+            OpenChildForm(FormSettings.GetInstance(), sender);
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////

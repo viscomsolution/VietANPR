@@ -10,16 +10,20 @@ namespace VietANPRdemo
     public enum ReadingMode
     {
         All,
-        TopLeft,
+        Best,
         Biggest,
         Center
     }
+
 
     static class Program
     {
         public static PlateReader reader;
 
-        public static ReadingMode readingMode = ReadingMode.TopLeft;
+
+        
+
+        public static ReadingMode readingMode = ReadingMode.Best;
         public static string delimiter = ";";
 
         /// <summary>

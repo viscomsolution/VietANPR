@@ -154,7 +154,14 @@ namespace VietANPRdemo
             }
             else if (e.KeyCode == Keys.Delete)
             {
-                FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                if(File.Exists(filePath))
+                {
+                    FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                }
+                else
+                {
+                    FormMain.GetInstance().PrintError("File not found: " + filePath);
+                }
             }
         }
 
@@ -350,7 +357,7 @@ namespace VietANPRdemo
 
             m_content += fileName + ",";
 
-            if (Program.readingMode == ReadingMode.TopLeft)
+            if (Program.readingMode == ReadingMode.Best)
             {
                 VehiclePlate[] plates = m_readers[availableReader].Reads(filePathAbs);
                 if(plates.Length > 0)
@@ -618,7 +625,49 @@ namespace VietANPRdemo
 
         private void btn_export_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string fileName = "danh_sach_bien_so.xlsx";
+
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+                
+                TGMTexcel excel = new TGMTexcel(fileName);
+                excel.AddSheet("Danh sach");
+
+
+                string[] headers = new string[] { "STT", "Ảnh", "Biển số", "Alphanumeric"};
+                excel.AddRow(0, 1, headers);
+
+
+                for (int i = 0; i < m_plates.Count; i++)
+                {
+                    Plate a = m_plates[i];
+                    a.index = i + 1;
+                    excel.AddRow(0, i + 2, a.ToArray(rd_fullPath.Checked));
+                }            
+
+
+
+                for (int i = 1; i <= headers.Length; i++)
+                {
+                    excel.SetAutoFitContent(0, i);
+                    excel.SetFormat(0, 1, i, Color.White, Color.Black, true);
+                }
+
+                excel.DrawTable(0, 1, 1, m_plates.Count + 1, headers.Length);
+
             
+                excel.Save();
+                if (MessageBox.Show("Bạn có muốn mở file excel?", "Save thành công", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(fileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có thể file excel đang mở, vui lòng kiểm tra lại", "Save file thất bại", MessageBoxButtons.OK);
+            }
         }
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
