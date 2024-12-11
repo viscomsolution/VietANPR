@@ -235,7 +235,7 @@ namespace VietANPRdemo
             if (!File.Exists(filePath))
             {
                 FormMain.GetInstance().PrintMessage("File does not exist");
-
+                return;
             }
 
 
@@ -257,7 +257,10 @@ namespace VietANPRdemo
             }
             else if (e.ClickedItem.Name == "btnDelete")
             {
-                FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                if(File.Exists(filePath))
+                {
+                    FileSystem.DeleteFile(filePath, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+                }                
             }
         }
 
@@ -308,7 +311,7 @@ namespace VietANPRdemo
                     availableReader = AvailableReader();
                 }
 
-                ReadAsync(availableReader, i, inputDir, filePath, validDir, invalidDir, failedDir);
+                Read(availableReader, i, inputDir, filePath, validDir, invalidDir, failedDir);
             }
         }
 
@@ -401,16 +404,16 @@ namespace VietANPRdemo
                         }
                         else if(plates.Length > 1)
                         {
+                            
                             for (int j = 0; j < plates.Length; j++)
                             {
+                                
                                 VehiclePlate p = plates[j];
                                 bmp = TGMTdraw.DrawRectangle(bmp, p.rect, Color.Green, false, thickness);
                                 isValid &= p.isValid;
                                 error = p.error;
-                                text += p.text + Program.delimiter;
                                 alphanumeric += p.alphanumeric + Program.delimiter;
-
-                                m_content += text + ",";
+                                m_content += p.text + Program.delimiter + ",";
                             }
 
                             m_content = m_content.Substring(0, m_content.Length - 1);

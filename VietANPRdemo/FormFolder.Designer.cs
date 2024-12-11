@@ -38,7 +38,9 @@
             this.btnOpenImage = new System.Windows.Forms.ToolStripMenuItem();
             this.btnDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.grFolder = new System.Windows.Forms.GroupBox();
+            this.btnDetect = new AltoControls.AltoButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtFolderInput = new AltoControls.BrowseDir();
             this.txtInvalidDir = new System.Windows.Forms.TextBox();
             this.chkMoveInvalid = new System.Windows.Forms.CheckBox();
             this.txtValidDir = new System.Windows.Forms.TextBox();
@@ -52,11 +54,9 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_export = new AltoControls.AltoButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.rd_fullPath = new System.Windows.Forms.RadioButton();
-            this.btn_export = new AltoControls.AltoButton();
-            this.btnDetect = new AltoControls.AltoButton();
-            this.txtFolderInput = new AltoControls.BrowseDir();
             ((System.ComponentModel.ISupportInitialize)(this.picResult)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.grFolder.SuspendLayout();
@@ -142,6 +142,27 @@
             this.grFolder.TabIndex = 33;
             this.grFolder.TabStop = false;
             // 
+            // btnDetect
+            // 
+            this.btnDetect.Active1 = System.Drawing.Color.DodgerBlue;
+            this.btnDetect.Active2 = System.Drawing.Color.DeepSkyBlue;
+            this.btnDetect.BackColor = System.Drawing.Color.Transparent;
+            this.btnDetect.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnDetect.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnDetect.ForeColor = System.Drawing.Color.White;
+            this.btnDetect.Inactive1 = System.Drawing.Color.DeepSkyBlue;
+            this.btnDetect.Inactive2 = System.Drawing.Color.DodgerBlue;
+            this.btnDetect.Location = new System.Drawing.Point(151, 86);
+            this.btnDetect.Name = "btnDetect";
+            this.btnDetect.Radius = 10;
+            this.btnDetect.Size = new System.Drawing.Size(110, 60);
+            this.btnDetect.Stroke = false;
+            this.btnDetect.StrokeColor = System.Drawing.Color.Gray;
+            this.btnDetect.TabIndex = 27;
+            this.btnDetect.Text = "Detect (F5)";
+            this.btnDetect.Transparency = false;
+            this.btnDetect.Click += new System.EventHandler(this.btnDetect_Click);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -151,6 +172,20 @@
             this.label1.Size = new System.Drawing.Size(76, 17);
             this.label1.TabIndex = 26;
             this.label1.Text = "Input folder";
+            // 
+            // txtFolderInput
+            // 
+            this.txtFolderInput.BackColor = System.Drawing.Color.Transparent;
+            this.txtFolderInput.BackgroundColor = System.Drawing.Color.White;
+            this.txtFolderInput.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(133)))), ((int)(((byte)(200)))));
+            this.txtFolderInput.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtFolderInput.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtFolderInput.Location = new System.Drawing.Point(15, 47);
+            this.txtFolderInput.Name = "txtFolderInput";
+            this.txtFolderInput.Padding = new System.Windows.Forms.Padding(5);
+            this.txtFolderInput.Size = new System.Drawing.Size(384, 33);
+            this.txtFolderInput.TabIndex = 25;
+            this.txtFolderInput.TextChanged += new System.EventHandler(this.txtFolderInput_TextChanged);
             // 
             // txtInvalidDir
             // 
@@ -254,7 +289,7 @@
             // columnHeader2
             // 
             this.columnHeader2.Text = "Plate";
-            this.columnHeader2.Width = 116;
+            this.columnHeader2.Width = 78;
             // 
             // columnHeader3
             // 
@@ -272,6 +307,28 @@
             this.groupBox1.Size = new System.Drawing.Size(995, 48);
             this.groupBox1.TabIndex = 35;
             this.groupBox1.TabStop = false;
+            // 
+            // btn_export
+            // 
+            this.btn_export.Active1 = System.Drawing.Color.DodgerBlue;
+            this.btn_export.Active2 = System.Drawing.Color.DeepSkyBlue;
+            this.btn_export.BackColor = System.Drawing.Color.Transparent;
+            this.btn_export.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btn_export.Enabled = false;
+            this.btn_export.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btn_export.ForeColor = System.Drawing.Color.White;
+            this.btn_export.Inactive1 = System.Drawing.Color.DeepSkyBlue;
+            this.btn_export.Inactive2 = System.Drawing.Color.DodgerBlue;
+            this.btn_export.Location = new System.Drawing.Point(197, 12);
+            this.btn_export.Name = "btn_export";
+            this.btn_export.Radius = 4;
+            this.btn_export.Size = new System.Drawing.Size(119, 30);
+            this.btn_export.Stroke = false;
+            this.btn_export.StrokeColor = System.Drawing.Color.Gray;
+            this.btn_export.TabIndex = 23;
+            this.btn_export.Text = "Export excel";
+            this.btn_export.Transparency = false;
+            this.btn_export.Click += new System.EventHandler(this.btn_export_Click);
             // 
             // radioButton2
             // 
@@ -296,63 +353,6 @@
             this.rd_fullPath.TabStop = true;
             this.rd_fullPath.Text = "Full path";
             this.rd_fullPath.UseVisualStyleBackColor = true;
-            // 
-            // btn_export
-            // 
-            this.btn_export.Active1 = System.Drawing.Color.DodgerBlue;
-            this.btn_export.Active2 = System.Drawing.Color.DeepSkyBlue;
-            this.btn_export.BackColor = System.Drawing.Color.Transparent;
-            this.btn_export.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btn_export.Enabled = false;
-            this.btn_export.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btn_export.ForeColor = System.Drawing.Color.White;
-            this.btn_export.Inactive1 = System.Drawing.Color.DeepSkyBlue;
-            this.btn_export.Inactive2 = System.Drawing.Color.DodgerBlue;
-            this.btn_export.Location = new System.Drawing.Point(197, 12);
-            this.btn_export.Name = "btn_export";
-            this.btn_export.Radius = 4;
-            this.btn_export.Size = new System.Drawing.Size(119, 30);
-            this.btn_export.Stroke = false;
-            this.btn_export.StrokeColor = System.Drawing.Color.Gray;
-            this.btn_export.TabIndex = 23;
-            this.btn_export.Text = "Export excel";
-            this.btn_export.Transparency = false;
-            this.btn_export.Click += new System.EventHandler(this.btn_export_Click);
-            // 
-            // btnDetect
-            // 
-            this.btnDetect.Active1 = System.Drawing.Color.DodgerBlue;
-            this.btnDetect.Active2 = System.Drawing.Color.DeepSkyBlue;
-            this.btnDetect.BackColor = System.Drawing.Color.Transparent;
-            this.btnDetect.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnDetect.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnDetect.ForeColor = System.Drawing.Color.White;
-            this.btnDetect.Inactive1 = System.Drawing.Color.DeepSkyBlue;
-            this.btnDetect.Inactive2 = System.Drawing.Color.DodgerBlue;
-            this.btnDetect.Location = new System.Drawing.Point(151, 86);
-            this.btnDetect.Name = "btnDetect";
-            this.btnDetect.Radius = 10;
-            this.btnDetect.Size = new System.Drawing.Size(110, 60);
-            this.btnDetect.Stroke = false;
-            this.btnDetect.StrokeColor = System.Drawing.Color.Gray;
-            this.btnDetect.TabIndex = 27;
-            this.btnDetect.Text = "Detect (F5)";
-            this.btnDetect.Transparency = false;
-            this.btnDetect.Click += new System.EventHandler(this.btnDetect_Click);
-            // 
-            // txtFolderInput
-            // 
-            this.txtFolderInput.BackColor = System.Drawing.Color.Transparent;
-            this.txtFolderInput.BackgroundColor = System.Drawing.Color.White;
-            this.txtFolderInput.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(133)))), ((int)(((byte)(200)))));
-            this.txtFolderInput.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.txtFolderInput.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtFolderInput.Location = new System.Drawing.Point(15, 47);
-            this.txtFolderInput.Name = "txtFolderInput";
-            this.txtFolderInput.Padding = new System.Windows.Forms.Padding(5);
-            this.txtFolderInput.Size = new System.Drawing.Size(384, 33);
-            this.txtFolderInput.TabIndex = 25;
-            this.txtFolderInput.TextChanged += new System.EventHandler(this.txtFolderInput_TextChanged);
             // 
             // FormFolder
             // 
