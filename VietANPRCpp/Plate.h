@@ -3,6 +3,7 @@
 
 class Plate
 {
+	int m_width, m_height;
 public:
 
 	static enum PlateType
