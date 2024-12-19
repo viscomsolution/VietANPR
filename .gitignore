@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+.vs/
+Example_VietANPR_Cpp/x64/
+ExampleVietANPR_CS/obj/
+ExampleVietANPR_VB/obj/
+VietANPRdemo/obj/
